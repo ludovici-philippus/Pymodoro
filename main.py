@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
 from time import sleep
-import winsound
 from threading import Thread
 
 class Pomodoro(object):
@@ -42,11 +41,15 @@ class Pomodoro(object):
             sleep(1)
             self.update_clock()
             self.root.update()
-            
-    
+
     def stop_pomodoro(self):
         self.running = False
-        winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
+        try:
+            import winsound
+            winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
+        except ImportError:
+            import os
+            os.system('beep -f 440 -l 1')
         messagebox.showinfo(title="End", message="The Pomodoro got to the end, go take a break!")
         self.time[0] = 5
         self.timeout.set(5)
