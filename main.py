@@ -48,8 +48,8 @@ class Pomodoro(object):
             import winsound
             winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
         except ImportError:
-            import os
-            os.system('beep -f 440 -l 1')
+            from beepy import beep
+            beep(sound="ping")
         messagebox.showinfo(title="End", message="The Pomodoro got to the end, go take a break!")
         self.time[0] = 5
         self.timeout.set(5)
