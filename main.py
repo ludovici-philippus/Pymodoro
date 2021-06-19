@@ -35,6 +35,7 @@ class Pomodoro(object):
         self.lb_clock.grid(row=0, column=0)
     
     def start_pomodoro(self):
+        self.running = True
         self.time[0] = self.timeout.get()
         self.lb_clock.grid(row=0, column=0)
         while self.running:
@@ -51,13 +52,14 @@ class Pomodoro(object):
             from beepy import beep
             beep(sound="ping")
         messagebox.showinfo(title="End", message="The Pomodoro got to the end, go take a break!")
+        self.root.focus_force()
         self.time[0] = 5
         self.timeout.set(5)
     
     def main(self):
-        self.running = True
         self.root.title("Pomodoro App")
         self.root.geometry("165x150")
+        self.root.focus_force()
         self.root.resizable(0, 0)
         self.root.mainloop()
 
